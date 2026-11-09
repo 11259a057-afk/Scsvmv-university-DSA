@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #define TABLE_SIZE 7
 
