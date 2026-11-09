@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -7,8 +5,7 @@
 #define MAX 100
 char stack[MAX];
 int top = -1;
-
-// Push operator onto stack
+
 void push(char c)
 {
     if (top >= MAX - 1)
@@ -67,44 +64,43 @@ void infixToPostfix(char infix[], char postfix[])
     {
         c = infix[i];
 
-        // Step 4.I: If token is an operand
-        // if(isalpha(c)
+        
         if (!isOperator(c) && c != '(' && c != ')' && c != '[' && c != ']' && c != '{' && c != '}')
         {
-            // Add it directly to the postfix expression
+            
             postfix[j++] = c;
         }
 
-        // Step 4.II: If token is an operator
+        
         else if (isOperator(c))
         {
-            // Step 4.II.A: Check if stack is empty OR top has lower precedence OR top is '('
+            
             if (top == -1 || precedence(peek()) < precedence(c) || peek() == '(')
             {
-                // Push the operator onto the stack
+              
                 push(c);
             }
-            // Step 4.II.B: Otherwise (top has higher or equal precedence)
+          
             else
             {
-                // Pop operators from stack and add to postfix until condition is true
+              
                 while (top != -1 && peek() != '(' && precedence(peek()) >= precedence(c))
                 {
                     postfix[j++] = pop();
                 }
-                // Then push the current operator onto the stack
+                
                 push(c);
             }
         }
 
-        // Step 4.III: If token is '('
+        
         else if (c == '(')
         {
-            // Push it onto the stack
+           
             push(c);
         }
 
-        // Step 4.IV: If token is ')'
+      
         else if (c == ')')
         {
             
@@ -115,7 +111,7 @@ void infixToPostfix(char infix[], char postfix[])
            
             if (top != -1)
             {
-                pop(); // Remove the '('
+                pop(); 
             }
         }
     }
@@ -126,7 +122,7 @@ void infixToPostfix(char infix[], char postfix[])
         postfix[j++] = pop();
     }
 
-    // Output the postfix expression
+    
     postfix[j] = '\0';
 }
 
